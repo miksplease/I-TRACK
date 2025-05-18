@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meet the Developers | I-Track</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-blue-900">
+
+<!-- Navigation Bar -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-blue-600 text-white shadow-md px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold">I-Track</div>
+    <ul class="hidden md:flex space-x-10">
+        <li><a href="{% url 'home' %}" class="hover:text-blue-300">Home</a></li>
+        <li><a href="#about" class="hover:text-blue-300">About</a></li>
+        <li><a href="#developers" class="hover:text-blue-300">Developers</a></li>
+    </ul>
+</nav>
+
+<!-- About Section -->
+<section id="about" class="pt-28 pb-16 bg-blue-50 min-h-screen px-4 sm:px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-4xl sm:text-5xl font-bold mb-6">About I-Track</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-700 mb-12">
+            I-Track is an innovative platform designed to streamline the monitoring of intern teachers.
+            With real-time tracking, attendance management, and supervisor oversight, it ensures an 
+            efficient and transparent internship experience.
+        </p>
+
+        <h3 class="text-2xl font-semibold mb-6">Key Features</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold mb-2">Real-Time Tracking</h4>
+                <p class="text-gray-700">Keep supervisors and interns connected through live status updates.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold mb-2">Attendance Management</h4>
+                <p class="text-gray-700">Track time-in/time-out records for reliable monitoring.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h4 class="text-xl font-semibold mb-2">Supervisor Oversight</h4>
+                <p class="text-gray-700">Enable supervisors to view and manage their assigned interns effectively.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Developers Section -->
+<section id="developers" class="py-16 px-4 sm:px-6 bg-white">
+    <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-4xl sm:text-5xl font-bold mb-6">Developers</h2>
+        <p class="text-lg text-gray-700 mb-4">
+            Our dedicated team of developers made I-Track possible. Meet the minds behind the project.
+        </p>
+        <p class="text-md text-gray-700 mb-10">
+            Need more information? <a href="#contact" class="text-blue-600 hover:text-blue-800">Contact us</a>
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-8">
+            <!-- Developer 1 -->
+            <div class="bg-blue-100 shadow-lg rounded-lg p-6 w-64 text-center">
+                <img src="{% static 'assets/dev1.jpeg' %}" alt="Developer 1" class="w-24 h-24 mx-auto rounded-full mb-4" />
+                <h3 class="text-xl font-semibold text-blue-900">Gaudicos, Christian</h3>
+                <p class="text-gray-600">Frontend Developer</p>
+            </div>
+
+            <!-- Developer 2 -->
+            <div class="bg-blue-100 shadow-lg rounded-lg p-6 w-64 text-center">
+                <img src="{% static 'assets/dev2.jpeg' %}" alt="Developer 2" class="w-24 h-24 mx-auto rounded-full mb-4" />
+                <h3 class="text-xl font-semibold text-blue-900">Velado, Mico</h3>
+                <p class="text-gray-600">Backend Developer</p>
+            </div>
+
+            <!-- Developer 3 -->
+            <div class="bg-blue-100 shadow-lg rounded-lg p-6 w-64 text-center">
+                <img src="{% static 'assets/dev3.jpg' %}" alt="Developer 3" class="w-24 h-24 mx-auto rounded-full mb-4" />
+                <h3 class="text-xl font-semibold text-blue-900">Lastrilla, Kim</h3>
+                <p class="text-gray-600">UI/UX Designer</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="bg-blue-50 py-16 px-4 sm:px-6">
+    <div class="max-w-xl mx-auto">
+        <h2 class="text-4xl font-bold text-blue-900 text-center mb-6">Contact Us</h2>
+        <p class="text-lg text-gray-700 text-center mb-8">
+            Have any questions or feedback? Reach out to us, and we'll get back to you as soon as possible.
+        </p>
+
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                    <input type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your name">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your email">
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                    <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" rows="4" placeholder="Write your message"></textarea>
+                </div>
+
+                <button class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+</body>
+</html>
