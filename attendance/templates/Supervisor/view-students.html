@@ -110,11 +110,14 @@
             <small class="text-muted d-block mb-1">
                 ⚠️ This cannot be changed later. Please double-check before saving.
             </small>
-            <input type="email" id="studentEmail" placeholder="Student Email" 
+            <input type="email" id="studentEmail" placeholder="Student Email"
             class="w-full p-2 border rounded" required
             pattern="^[a-zA-Z0-9._%+\-]+@gmail\.com$"
             title="Must be a valid @gmail.com email address"/>
             <span id="studentEmailError" class="text-red-500 text-sm hidden"></span>
+            <small class="text-muted d-block mb-1">
+                ⚠️ Please ensure the email address provided is valid and active.
+            </small>
             <h6 class="text-xl font-bold mb-4">Temporary password</h6>
             <small class="text-sm text-gray-500 italic">Default password will be the same as the Student ID.</small>
             <input type="hidden" id="courseId" value="{{ course.id }}" />

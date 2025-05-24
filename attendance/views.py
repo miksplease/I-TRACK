@@ -24,6 +24,7 @@ from datetime import datetime
 from .models import Attendance 
 from django.utils.timezone import now
 from django.utils import timezone
+from django.utils.timezone import localdate
 
 # ---------- HOME VIEWS ----------
 
@@ -45,6 +46,8 @@ def supervisor_login(request):
             return redirect('supervisor_dashboard')
         else:
             messages.error(request, 'Invalid credentials or not a supervisor.')
+            return render(request, 'Home/supervisor-login.html', {'email': email})
+        
     return render(request, 'Home/supervisor-login.html')
 
 def supervisor_register(request):
@@ -55,11 +58,11 @@ def supervisor_register(request):
 
         if password != confirm_password:
             messages.error(request, "Passwords do not match.")
-            return redirect('supervisor_register')
+            return render(request, 'Home/supervisor-register.html', {'email': email})
 
         if get_user_model().objects.filter(email=email).exists():
             messages.error(request, "Email already in use.")
-            return redirect('supervisor_register')
+            return render(request, 'Home/supervisor-register.html', {'email': email})
 
         user = CustomUser.objects.create_user(
             email=email,
@@ -87,6 +90,7 @@ def intern_login(request):
             return redirect('intern_dashboard')  # ✅ Already changed password
         else:
             messages.error(request, 'Invalid credentials or not an intern.')
+            return render(request, 'Home/intern-login.html', {'email': email})
 
     return render(request, 'Home/intern-login.html')
 
@@ -352,9 +356,10 @@ def view_intern_attendance(request, intern_id):
 
     # Same weighted logic
     effective_attendance = present_count + (late_count * 0.5)
-
     attendance_percentage = round((effective_attendance / total) * 100, 2) if total > 0 else 100.0
 
+    today = localdate()
+    today_attendance = Attendance.objects.filter(intern=intern, date=today).first()
 
     return render(request, 'Supervisor/attendance-view.html', {
         'student': intern,
@@ -363,7 +368,8 @@ def view_intern_attendance(request, intern_id):
         'late_count': late_count,
         'absent_count': absent_count,
         'attendance_percentage': attendance_percentage,
-        'current_month': month or timezone.now().strftime('%Y-%m')
+        'current_month': month or timezone.now().strftime('%Y-%m'),
+        'today_attendance': today_attendance,
     })
 
 
@@ -444,6 +450,8 @@ def intern_dashboard(request):
         "attendance_percentage": attendance_percentage,
         "attendance_records": attendance_records.order_by('-date'),
         "current_month": request.GET.get('month', now().strftime("%Y-%m")),
+        "has_timed_in": bool(today_attendance and today_attendance.time_in),
+        "has_timed_out": bool(today_attendance and today_attendance.time_out),
     }
 
     return render(request, 'Intern/intern-dashboard.html', context)
@@ -460,8 +468,8 @@ def intern_time_in(request):
     if attendance.time_in is None:
         current_time = now.time()
 
-        # Define 8:10 AM as the late threshold in local time
-        late_time = datetime.strptime("08:10", "%H:%M").time()
+        # Define late
+        late_time = datetime.strptime("08:05", "%H:%M").time()
 
         # Set time in and status
         attendance.time_in = current_time

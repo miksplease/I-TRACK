@@ -25,16 +25,14 @@
             <!-- Email Field -->
             <div class="mb-4">
                 <label class="block text-gray-700 font-medium mb-2">Email</label>
-                <input type="email" name="email" placeholder="Enter your email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <input type="email" name="email" value="{{ email }}" placeholder="Enter your email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
 
             <!-- Password Field -->
             <div class="mb-4 relative">
                 <label class="block text-gray-700 font-medium mb-2">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                <span onclick="togglePassword()" class="absolute top-11 right-4 cursor-pointer text-gray-500">
-                    👁️
-                </span>
+                <span onclick="togglePassword()" class="absolute top-11 right-4 cursor-pointer text-gray-500"></span>
             </div>
             {% if messages %}
             <div class="p-1 mb-2">
@@ -54,7 +52,7 @@
                 <label class="flex items-center text-gray-700">
                     <input type="checkbox" class="mr-2"> Remember me
                 </label>
-                <a href="#" class="text-blue-600 hover:underline text-sm">Forgot Password?</a>
+                <a href="{% url 'password_reset' %}" class="text-blue-600 hover:underline text-sm">Forgot Password?</a>
             </div>
 
             <!-- Login Button -->

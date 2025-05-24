@@ -32,31 +32,54 @@
   <!-- Main Content -->
   <main class="flex-1 p-4 lg:p-6 overflow-y-auto transition-all duration-300">
 
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold">Attendance - {{ student.get_full_name }}</h1>
-      <a href="#" id="backLink" class="text-blue-700 hover:underline">← Go Back</a>
-    </div>
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Attendance - {{ student.get_full_name }}</h1>
+    <a href="#" id="backLink" class="text-blue-700 hover:underline">← Go Back</a>
+  </div>
 
-    <!-- Attendance Summary -->
-    <div class="grid grid-cols-2 gap-4 mb-6 sm:grid-cols-2 md:grid-cols-4">
-      <div class="bg-white p-4 rounded shadow text-center">
-        <p class="text-gray-500">Total Present</p>
-        <p class="text-xl text-green-500 font-bold">{{ present_count }}</p>
-      </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <p class="text-gray-500">Total Late</p>
-        <p class="text-xl text-yellow-500 font-bold">{{ late_count }}</p>
-      </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <p class="text-gray-500">Total Absent</p>
-        <p class="text-xl text-red-500 font-bold">{{ absent_count }}</p>
-      </div>
-      <div class="bg-white p-4 rounded shadow text-center">
-        <p class="text-gray-500">Attendance %</p>
-        <p class="text-xl text-green-700 font-bold">{{ attendance_percentage }}%</p>
-      </div>
+  <!-- Today's Attendance Status -->
+  {% if today_attendance %}
+    <div class="bg-white p-4 rounded shadow mb-6">
+      <h2 class="text-xl font-semibold mb-2">📌 Today's Attendance</h2>
+      <p><strong>Status:</strong>
+        {% if today_attendance.status == "Present" %}
+          <span class="text-green-600 font-medium">{{ today_attendance.status }}</span>
+        {% elif today_attendance.status == "Late" %}
+          <span class="text-yellow-500 font-medium">{{ today_attendance.status }}</span>
+        {% else %}
+          <span class="text-red-600 font-medium">{{ today_attendance.status }}</span>
+        {% endif %}
+      </p>
+      <p><strong>Time In:</strong> {{ today_attendance.time_in|default:"--" }}</p>
+      <p><strong>Time Out:</strong> {{ today_attendance.time_out|default:"--" }}</p>
     </div>
+  {% else %}
+    <div class="bg-white p-4 rounded shadow mb-6">
+      <h2 class="text-xl font-semibold mb-2">📌 Today's Attendance</h2>
+      <p class="text-red-600">No attendance record for today.</p>
+    </div>
+  {% endif %}
+
+  <!-- Attendance Summary -->
+  <div class="grid grid-cols-2 gap-4 mb-6 sm:grid-cols-2 md:grid-cols-4">
+    <div class="bg-white p-4 rounded shadow text-center">
+      <p class="text-gray-500">Total Present</p>
+      <p class="text-xl text-green-500 font-bold">{{ present_count }}</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow text-center">
+      <p class="text-gray-500">Total Late</p>
+      <p class="text-xl text-yellow-500 font-bold">{{ late_count }}</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow text-center">
+      <p class="text-gray-500">Total Absent</p>
+      <p class="text-xl text-red-500 font-bold">{{ absent_count }}</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow text-center">
+      <p class="text-gray-500">Attendance %</p>
+      <p class="text-xl text-green-700 font-bold">{{ attendance_percentage }}%</p>
+    </div>
+  </div>
 
     <!-- Month Filter -->
     <form method="GET" class="mb-4">

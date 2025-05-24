@@ -40,16 +40,29 @@
     <div class="bg-white p-6 rounded-lg shadow mb-6">
       <h2 class="text-xl font-semibold mb-4">🕒 Daily Attendance</h2>
 
-      <div class="flex flex-wrap gap-4 mb-4">
-        <form method="POST" action="{% url 'intern_time_in' %}">
-          {% csrf_token %}
-          <button type="submit" class="bg-blue-500 hover:bg-green-600 text-white px-6 py-2 rounded w-full sm:w-auto">Time In</button>
-        </form>
+    <div class="flex flex-wrap gap-4 mb-4">
+    {% if not has_timed_in %}
+      <!-- Show Time In button -->
+      <form method="POST" action="{% url 'intern_time_in' %}">
+        {% csrf_token %}
+        <button type="submit" class="bg-blue-500 hover:bg-green-600 text-white px-6 py-2 rounded w-full sm:w-auto">
+          Time In
+        </button>
+      </form>
 
-        <form method="POST" action="{% url 'intern_time_out' %}">
-          {% csrf_token %}
-          <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded w-full sm:w-auto">Time Out</button>
-        </form>
+    {% elif has_timed_in and not has_timed_out %}
+      <!-- Show Time Out button only -->
+      <form method="POST" action="{% url 'intern_time_out' %}">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded w-full sm:w-auto">
+          Time Out
+        </button>
+      </form>
+
+    {% else %}
+      <!-- Both timed in and timed out -->
+      <p class="text-green-600 text-sm">You have completed your attendance for today.</p>
+    {% endif %}
       </div>
 
       <div class="text-gray-700 space-y-1">
