@@ -45,6 +45,13 @@
         <input type="password" name="password" placeholder="Create a password"
           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required>
+        <span
+          id="togglePassword"
+          onclick="togglePassword('password', 'togglePassword')"
+          class="absolute top-11 right-4 cursor-pointer text-gray-500"
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
       </div>
 
       <!-- Confirm Password -->
@@ -53,6 +60,13 @@
         <input type="password" name="confirm_password" placeholder="Confirm your password"
           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required>
+        <span
+          id="toggleConfirmPassword"
+          onclick="togglePassword('confirm_password', 'toggleConfirmPassword')"
+          class="absolute top-11 right-4 cursor-pointer text-gray-500"
+        >
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
       </div>
 
       <!-- Register Button -->
@@ -70,5 +84,24 @@
       </p>
     </div>
   </div>
+
+
+  <script>
+    function togglePassword(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId).querySelector("i");
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  </script>
+
 </body>
 </html>

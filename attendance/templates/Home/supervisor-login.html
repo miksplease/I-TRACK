@@ -32,7 +32,9 @@
             <div class="mb-4 relative">
                 <label class="block text-gray-700 font-medium mb-2">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                <span onclick="togglePassword()" class="absolute top-11 right-4 cursor-pointer text-gray-500"></span>
+                <span onclick="togglePassword()" class="absolute top-11 right-4 cursor-pointer text-gray-500">
+                    <i id="toggleIcon" class="fa-solid fa-eye"></i>
+                </span>
             </div>
             {% if messages %}
             <div class="p-1 mb-2">
@@ -79,10 +81,21 @@
 
     <script>
         function togglePassword() {
-            let passwordField = document.getElementById("password");
-            passwordField.type = passwordField.type === "password" ? "text" : "password";
+            const password = document.getElementById("password");
+            const icon = document.getElementById("toggleIcon");
+
+            if (password.type === "password") {
+                password.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                password.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
         }
     </script>
+
 
 </body>
 </html>
