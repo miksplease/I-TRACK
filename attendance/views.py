@@ -209,7 +209,7 @@ def view_students(request, course_id):
     # Get students for this course
     student_links = CourseStudent.objects.filter(course=course).select_related('student')
     students = [link.student for link in student_links]
-
+    
     return render(request, 'Supervisor/view-students.html', {
         'course': course,
         'students': students,
