@@ -10,14 +10,15 @@
 <body class="bg-white text-blue-900">
 
 <!-- Navigation Bar -->
-<nav class="fixed top-0 left-0 w-full z-50 bg-blue-600 text-white shadow-md px-6 py-4 flex justify-between items-center">
+<nav class="fixed top-0 left-0 w-full z-50 bg-blue-600 text-white shadow-md px-6 py-4 flex flex-wrap justify-between items-center">
     <div class="text-2xl font-bold">I-Track</div>
-    <ul class="hidden md:flex space-x-10">
+    <ul class="flex flex-wrap gap-6 mt-2 sm:mt-0">
         <li><a href="{% url 'home' %}" class="hover:text-blue-300">Home</a></li>
         <li><a href="#about" class="hover:text-blue-300">About</a></li>
         <li><a href="#developers" class="hover:text-blue-300">Developers</a></li>
     </ul>
 </nav>
+
 
 <!-- About Section -->
 <section id="about" class="pt-28 pb-16 bg-blue-50 min-h-screen px-4 sm:px-6 lg:px-12">
